@@ -1,0 +1,37 @@
+{
+  "committed_n": 3,
+  "_artifact": "P032 panel checker commitment record — B0d pre-registration stage.",
+  "_stage": "b0d-commitment-only",
+  "_c2f_semantics": {
+    "protocol_field_name": "N",
+    "this_file_field_name": "committed_n",
+    "value": 3,
+    "definition": "N is the number of scorer runs per item per panel seat.",
+    "fixed_across": [
+      "all items in the deterministic blind sample",
+      "all three scorer configurations (A1, A2, A3)"
+    ],
+    "pre_registration_statement": "This value is committed at C2 pre-registration and is published here before B0d publishes. Any change to N after B0d requires re-publishing the protocol as a new B0-revision. It may not be changed by a runner, a harness argument, or a re-run.",
+    "authority": "ops/projects/P032_B0_BENCHMARK_PROTOCOL.md §7 C2(f)",
+    "naming_note": "The protocol prose (§7 C2(f)) names this quantity `N`. The C4 checker (scripts/b3/tier3_checker.py, load_checker_input) reads the top-level key `committed_n` and no other key. `committed_n` is therefore the single machine-authoritative spelling and is deliberately NOT duplicated under a second key `N`, so the file cannot carry two values that disagree."
+  },
+  "_consumed_by": {
+    "check": "vi.a",
+    "check_name": "notarization_token_count",
+    "script": "scripts/b3/tier3_checker.py",
+    "function": "check_notarization",
+    "semantics": "For each panel seat, check (vi.a) counts the RFC-3161 tokens present on disk at panel/checker-inputs/<seat>/run-<i>/notarization_token.tsr and requires that count to equal committed_n exactly. Missing tokens, surplus tokens, or a count mismatch is a protocol violation and invalidates that scorer's run per C3.",
+    "why_it_matters": "RFC-3161 notarization proves that the shown runs happened. It cannot on its own prove that no other runs happened. The committed N is what turns a set of notarized runs into a set that can be checked for arithmetic completeness. Without an N committed before publish, check (vi.a) has nothing to verify against and a runner could prune the published set silently.",
+    "known_residual_gap": "Per §7 C2(g) surface 2.6, check (vi.a) bounds PUBLISHED runs, not EXECUTED runs. A runner who executes N+K calls, notarizes all N+K, and publishes only the best N still passes (vi.a). Committing N closes the prune-after-publish gap, not the surplus-execution gap."
+  },
+  "_publication": {
+    "protocol_published_path": "public/p032-b3-results/panel/checker.json",
+    "staging_path_in_repo": "ops/projects/P032/B0/panel/checker.json",
+    "note": "The published results repository does not exist yet; its creation is staged separately (W3.4) and is not performed by this ticket. This file is the in-repo staging copy. scripts/b3/tier3_checker.py takes the panel directory as a runtime --panel-dir argument and hardcodes no absolute panel path, so the staging location is free; it was chosen to sit beside the other B0-committed artifacts the b3 tooling already resolves under ops/projects/P032/B0/ (the pinned TSA trust anchors at ops/projects/P032/B0/tsa/*.pem, referenced by PINNED_TSA_PEM in tier3_checker.py)."
+  },
+  "_completeness": {
+    "b0d_state": "commitment-only",
+    "statement": "At B0d this file carries the pre-registered commitment (committed_n) and nothing else. The keys that scripts/b3/tier3_checker.py additionally requires — `adjudicators`, `sample`, `blinded_field_values` — are B3 run outputs (per-scorer prompt hashes, actual prompt bytes, per-run response-metadata hashes, notarization token relpaths) and do not exist at B0d. Running the checker against this file today therefore exits 1 (malformed input) by design. That is the correct and honest state: no placeholder hashes are written here.",
+    "b3_handoff_requirement": "scripts/b3/panel_run_harness.py::publish_panel_checker_artifacts writes panel/checker.json wholesale from its own inputs and does not read a pre-existing file. Its committed_n comes from the module constant COMMITTED_N (= 3) or a caller keyword argument. The B3 assembly step MUST verify that the committed_n it emits equals the 3 committed in this file. That equality is currently a convention, not an enforced invariant; see the divergence finding in the accompanying result document."
+  }
+}

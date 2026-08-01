@@ -1,0 +1,60 @@
+# P032 B0d — tier3 checker test-suite run capture
+# command: python3 scripts/b3/tier3_checker_tests.py
+# run from repo root; capture written 2026-08-01T14:05:04Z UTC (run completed seconds earlier in the same session)
+# exit code: 0
+# stdout: empty (0 bytes)
+# stderr (verbatim, 3605 bytes, unittest writes its report to stderr):
+test_00_golden_path (__main__.Tier3CheckerTests)
+All seven checks pass for A1, A2, A3 — exit 0, all booleans true. ... ok
+test_01_i_system_prompt_bytes_tampered (__main__.Tier3CheckerTests)
+A1 system-prompt bytes mutated on disk vs. committed hash. ... ok
+test_02_i_user_template_bytes_tampered (__main__.Tier3CheckerTests)
+A2 user-prompt-template bytes mutated on disk. ... ok
+test_03_i_committed_hash_drift (__main__.Tier3CheckerTests)
+A3 committed system-prompt hash mutated (commit drift, not bytes). ... ok
+test_04_ii_sample_bytes_mutated (__main__.Tier3CheckerTests) ... ok
+test_05_ii_sample_not_in_actual_user_prompt (__main__.Tier3CheckerTests) ... ok
+test_06_ii_committed_sample_hash_drift (__main__.Tier3CheckerTests) ... ok
+test_07_iii_blinded_leak_A1 (__main__.Tier3CheckerTests) ... ok
+test_08_iii_blinded_leak_A2_case_insensitive (__main__.Tier3CheckerTests) ... ok
+test_09_iii_blinded_leak_A3 (__main__.Tier3CheckerTests) ... ok
+test_10_iv_provider_drift (__main__.Tier3CheckerTests)
+A1 runs[0].provider drifts from commit.provider. ... ok
+test_11_iv_api_model_identifier_drift (__main__.Tier3CheckerTests) ... ok
+test_12_iv_pinned_revision_drift (__main__.Tier3CheckerTests) ... ok
+test_13_v_response_id_absent (__main__.Tier3CheckerTests) ... ok
+test_14_v_response_metadata_hash_drift (__main__.Tier3CheckerTests) ... ok
+test_15_vi_a_token_absent (__main__.Tier3CheckerTests)
+A1 run-1 notarization_token.tsr file deleted from disk. ... ok
+test_16_vi_a_token_count_below_N (__main__.Tier3CheckerTests)
+A2 declares only 2 runs (below committed N=3) after mutating the ... ok
+test_17_vi_a_token_count_above_N (__main__.Tier3CheckerTests)
+A3 gets a spurious extra .tsr file added to a new run-3 subdir. ... ok
+test_18_vi_b_imprint_drifted (__main__.Tier3CheckerTests)
+A1 run-2 envelope mutated on disk AFTER the token was issued — ... ok
+test_19_vi_c_signature_invalid (__main__.Tier3CheckerTests)
+A2 run-0 token replaced with a token issued by an UNPINNED TSA ... ok
+test_20_vii_aggregate_verdict_differs (__main__.Tier3CheckerTests)
+(a) Published aggregate verdict differs from the recomputed ... ok
+test_21_vii_lone_parsing_run_published_as_its_verdict (__main__.Tier3CheckerTests)
+(b) One-of-three-parsing row published as the lone run's verdict ... ok
+test_22_vii_zero_parsing_row_fabricated_rationale (__main__.Tier3CheckerTests)
+(c) Zero-parsing row published with a fabricated rationale ... ok
+test_99_malformed_checker_json_exits_1 (__main__.Tier3CheckerTests)
+Missing top-level key in checker.json → exit 1 (not 2). ... ok
+test_denominator_is_committed_n_not_published_run_count (__main__.CollapseRuleUnitTests) ... ok
+test_gentime_tie_broken_by_ascending_envelope_hash (__main__.CollapseRuleUnitTests) ... ok
+test_majority_two_of_three (__main__.CollapseRuleUnitTests) ... ok
+test_one_one_split_with_unparseable_defaults_trivial_no_marker (__main__.CollapseRuleUnitTests) ... ok
+test_one_parsing_of_three_defaults_trivial_with_marker (__main__.CollapseRuleUnitTests) ... ok
+test_parse_gen_time_absent_returns_none (__main__.CollapseRuleUnitTests) ... ok
+test_parse_gen_time_fractional_seconds_sort_before_next_second (__main__.CollapseRuleUnitTests) ... ok
+test_parse_gen_time_second_precision (__main__.CollapseRuleUnitTests) ... ok
+test_rationale_is_earliest_gentime_contributing_run (__main__.CollapseRuleUnitTests) ... ok
+test_unanimous_trivial (__main__.CollapseRuleUnitTests) ... ok
+test_zero_parsing_defaults_trivial_with_marker (__main__.CollapseRuleUnitTests) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 6.619s
+
+OK
