@@ -1,6 +1,6 @@
 # Build log, entry 1: the tool scored 100% trivial on its own benchmark, and it was right to
 
-**Status:** DRAFT. Not published. Awaiting the §4a content gate, and then HELD pending CEO approval on the text.
+**Status:** Published 2026-08-06 in commit 1eee6096a7de23a5853faa38b42ce1fcf96f6b10.
 **Date:** 2026-08-06.
 **Entry:** 1 of a continuing log.
 

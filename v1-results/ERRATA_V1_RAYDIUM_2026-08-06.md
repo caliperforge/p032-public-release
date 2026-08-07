@@ -1,6 +1,6 @@
 # Errata to P032 Results v1 (Raydium CP-Swap)
 
-**Status:** DRAFT. Not published. Awaiting the §4a content gate and a COO clearance.
+**Status:** Published 2026-08-06 in commit 7169ea4cc361f854f6dae1168be2c29003f4b458.
 **Attaches to:** `RESULTS_V1_RAYDIUM_2026-08-05.md`, sha256
 `66e39b0bc3a673df95b988ef87324c9c5de63e7c5d32e9514848c9431acabcab`.
 **Date:** 2026-08-06.
